@@ -28,6 +28,8 @@ end
 module Generator = struct
   type 'a t = (rng -> int -> 'a)
 
+  let fixSize size g = fun rng _ -> g rng size
+
   (* sample *)
   (* recursive *)
   (* fmap *)
