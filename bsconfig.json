@@ -4,7 +4,8 @@
     "dir": "src"
   }, {
     "dir": "__tests__",
-    "type": "dev"
+    "type": "dev",
+    "subdirs": ["theBox"]
   }],
   "bs-dependencies": ["bs-jest"]
 }

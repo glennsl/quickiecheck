@@ -1,7 +1,7 @@
-open Quickie
 open Jest
-
-module Quick = Make(struct
+let (forAll) = Quickie.Property.(forAll);
+module Gen = TheBox.OfGenerators
+module Quick = Quickie.Make(struct
   type t = unit case
   let ok () = Just Ok
   let fail s = Just (Fail s)
@@ -9,16 +9,16 @@ end)
 
 let _ =
 
-test "first test" (fun _ ->
+test "int < size" (fun _ ->
   Quick.check
-    (Prop.forAll
-      (fun n -> n mod 10)
-      (fun n -> n < 10))
+    (forAll
+      Gen.int
+      (fun n -> Gen.int (fun () -> n) n < n))
 );
 
-test "second test" (fun _ ->
+test "int > 0" (fun _ ->
   Quick.check
-    (Prop.forAll
-      (fun n -> Quickie.fromWhatever (Quickie.Gen.generateFromExample (Quickie.toWhatever "abc") n))
-      (fun s -> "abc" |> Js.String.includes s |> Js.to_bool))
+    (forAll
+      Gen.int
+      (fun n -> n > 0))
 );
