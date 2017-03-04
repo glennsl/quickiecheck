@@ -1,0 +1,36 @@
+{
+  "name": "quickiecheck",
+  "version": "0.0.1",
+  "description": "Quickcheck implementation for BuckleScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "bsb -make-world -w",
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world",
+    "test": "npm run build && jest",
+    "watch:bsb": "bsb -make-world -w",
+    "watch:jest": "jest --watchAll",
+    "watch:screen": "screen -c .screenrc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glennsl/quickiecheck.git"
+  },
+  "keywords": [
+    "quickcheck",
+    "bucklescript",
+    "javascript",
+    "ocaml",
+    "test"
+  ],
+  "author": "glennsl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glennsl/quickiecheck/issues"
+  },
+  "homepage": "https://github.com/glennsl/quickiecheck#readme",
+  "devDependencies": {
+    "bs-platform": "bloomberg/bucklescript",
+    "bs-jest": "BuckleTypes/bs-jest"
+  }
+}
