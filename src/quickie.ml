@@ -87,16 +87,18 @@ end = struct
 
   let max_rng_int = (1 lsl 30) - 1
 
-  let rec run rngState property = function
-    | 0 -> Assert.ok ()
+  let run rngState property iterations =
+    let rec iter = function
+    | i when i >= iterations -> Assert.ok ()
     | i -> 
       let size = max_rng_int in (* TODO *)
       let rng = fun () -> RNG.int rngState in
       match property rng size with
       | Ok ->
-        run rngState property (i - 1)
+        iter (i + 1)
       | Fail message ->
-        Assert.fail ("Using seed: " ^ (string_of_int (RNG.seed rngState)) ^ "\r\n\r\n" ^ message ^ "\r\n")
+        Assert.fail ("Iteration " ^ (string_of_int i) ^ " using seed: " ^ (string_of_int (RNG.seed rngState)) ^ "\r\n\r\n" ^ message ^ "\r\n")
+    in iter 0
 
   let check
     ?(seed=Random.int max_rng_int)
