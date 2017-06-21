@@ -1,4 +1,4 @@
-# Quickiecheck - a BuckleScript quickcheck implementation
+# Quickiecheck - an experimental BuckleScript quickcheck implementation
 
 Alternative name: "recheck"
 
