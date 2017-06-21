@@ -37,6 +37,7 @@ test {js|int - 10±5% in bottom decile|js} (fun _ ->
   let quantileThreshold = max / quantileSizePercentage in
   let quantile v = v |> Js.Array.filter ((>) quantileThreshold) in
   let deviation q = q |> Array.length |> ((-) quantileSize) |> abs in
+
   Quick.check
     (forAll
       (fixSize sampleSize (Gen.arrayOf (fixSize max Gen.int)))
@@ -62,6 +63,7 @@ test {js|int - 10±5% in top decile|js} (fun _ ->
   let quantileThreshold = max - (max / quantileDivisor) in
   let quantile v = v |> Js.Array.filter ((<) quantileThreshold) in
   let deviation q = q |> Array.length |> ((-) quantileSize) |> abs in
+
   Quick.check
     (forAll
       (fixSize sampleSize (Gen.arrayOf (fixSize max Gen.int)))
@@ -87,6 +89,7 @@ test {js|choose - 10±5% in bottom decile|js} (fun _ ->
   let quantileThreshold = max / quantileDivisor in
   let quantile v = v |> Js.Array.filter ((>) quantileThreshold) in
   let deviation q = q |> Array.length |> ((-) quantileSize) |> abs in
+
   Quick.check
     (forAll
       (fixSize sampleSize (Gen.arrayOf (fixSize max (Gen.choose 0 max))))
@@ -112,6 +115,7 @@ test {js|choose - 10±5% in top decile|js} (fun _ ->
   let quantileThreshold = max - (max / quantileDivisor) in
   let quantile v = v |> Js.Array.filter ((<) quantileThreshold) in
   let deviation q = q |> Array.length |> ((-) quantileSize) |> abs in
+
   Quick.check
     (forAll
       (fixSize sampleSize (Gen.arrayOf (fixSize max (Gen.choose 0 max))))
@@ -137,6 +141,7 @@ test {js|oneOf - ±10% even distribution|js} (fun _ ->
     arr |> Js.Array.filter ((=) value)
         |> Array.length
     in
+
   Quick.check
     (forAll
       (fixSize sampleSize (Gen.arrayOf (Gen.oneOf choices)))

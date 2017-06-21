@@ -45,7 +45,7 @@ describe "Quickie.check" (fun _ ->
       let actual = ref 0 in
       let expected = rng () mod 100 in
       let _ = Q.check ~iterations:expected
-        (fun rng _ -> actual := !actual + 1; Ok) in
+        (fun _ _ -> actual := !actual + 1; Ok) in
       if (!actual = expected) then Ok
       else Fail (string_of_int !actual ^ " <> " ^ string_of_int expected)
     )
