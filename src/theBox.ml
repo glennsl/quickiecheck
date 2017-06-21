@@ -18,7 +18,7 @@ module OfGenerators = struct
     choose 0 255 rng size |> char_of_int
 
   let arrayOf gen_element rng size =
-    Array.init size (fun i -> gen_element rng size)
+    Array.init size (fun _ -> gen_element rng size)
 
   (* let listOf gen_element rnd size = ... *)
 
