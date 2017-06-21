@@ -1,11 +1,11 @@
 open Jest
-open Expect1
-let (forAll) = Quickie.Property.(forAll);
+open Expect
+
 module Gen = TheBox.OfGenerators
 module Quick = Quickie.Make(struct
-  type t = unit case
-  let ok () = Just Ok
-  let fail s = Just (Fail s)
+  type t = unit assertion
+  let ok () = pass
+  let fail s = fail s
 end)
 
 type assertion =
@@ -83,5 +83,5 @@ describe "Quickie.check" (fun _ ->
 );
 
 describe "Property.forAll" (fun _ ->
-  test "" (fun _ -> Just Ok)
+  test "" (fun _ -> pass)
 );

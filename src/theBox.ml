@@ -9,7 +9,7 @@ module OfGenerators = struct
     assert (Array.length generators > 0);
     let n = Array.length generators in
     let i = (rng ()) mod n in
-    generators.(i)
+    generators.(i) rng size
 
   let char rng size =
     choose 0 255 rng size |> char_of_int

@@ -46,11 +46,11 @@ end = struct
   type 'a predicate = ('a -> bool)
 
   let beta_reduce x f =
-    match [%re "/function\\s*\\(([^\\)]+)\\)/"] |> Js.Re.exec f |> Js.Null.to_opt with
+    match [%re "/function\\s*\\(([^\\)]+)\\)/"] |> Js.Re.exec f with
     | None -> f
     | Some res ->
       let arg = (res |> Js.Re.matches).(1) in
-      match [%re "/function\\s+\\(.+\\)\\s*{([\\s\\S]*)}/"] |> Js.Re.exec f |> Js.Null.to_opt with
+      match [%re "/function\\s+\\(.+\\)\\s*{([\\s\\S]*)}/"] |> Js.Re.exec f with
       | None -> f
       | Some res ->
         res |> Js.Re.matches

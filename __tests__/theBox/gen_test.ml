@@ -1,13 +1,13 @@
-
 open Jest
-module Gen = TheBox.OfGenerators
+
 let (forAll) = Quickie.Property.(forAll)
 let (fixSize) = Quickie.Generator.(fixSize)
 
+module Gen = TheBox.OfGenerators
 module Quick = Quickie.Make(struct
-  type t = unit case
-  let ok () = Just Ok
-  let fail s = Just (Fail s)
+  type t = unit assertion
+  let ok () = pass
+  let fail s = fail s
 end)
 
 let _ =
@@ -133,7 +133,7 @@ test {js|choose - 10±5% in top decile|js} (fun _ ->
 );
 
 test {js|oneOf - ±10% even distribution|js} (fun _ ->
-  let choices = [| "a"; "b"; "c" |] in
+  let choices = [| "a"; "b"; "c" |]in
   let sampleSize = 1000 in
   let target = sampleSize / Array.length choices in
   let acceptedDeviation = target / 10 in
@@ -144,7 +144,7 @@ test {js|oneOf - ±10% even distribution|js} (fun _ ->
 
   Quick.check
     (forAll
-      (fixSize sampleSize (Gen.arrayOf (Gen.oneOf choices)))
+      (fixSize sampleSize (Gen.arrayOf (Gen.oneOf (choices |> Array.map (fun x _ _ -> x)))))
       (fun arr ->
         choices
           |> Array.map (count arr)
