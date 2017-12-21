@@ -16,12 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/glennsl/quickiecheck.git"
   },
+  "homepage": "https://github.com/glennsl/quickiecheck#readme",
+  "bugs": "https://github.com/glennsl/quickiecheck/issues",
   "keywords": [
-    "quickcheck",
     "bucklescript",
-    "javascript",
-    "ocaml",
-    "test"
+    "quickcheck",
+    "test",
+    "property-based testing"
   ],
   "author": "glennsl",
   "license": "MIT",
